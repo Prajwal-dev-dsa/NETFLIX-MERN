@@ -22,7 +22,7 @@ export const protectedRoute = async (req, res, next) => {
         .status(401)
         .json({ success: false, message: "Unauthorized - User not found" });
     }
-    req.user = user; //this is the user that we found in the database and we send it to the next middleware
+    req.user = user; //this is the user that we found in the database and we send it to the next middleware, by pushing the data of user to req.user we can use it anywhere we want!
     next();
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
