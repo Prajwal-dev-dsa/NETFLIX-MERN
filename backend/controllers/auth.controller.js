@@ -164,3 +164,20 @@ export const logout = async (req, res) => {
     });
   }
 };
+
+export const authCheck = async (req, res) => {
+  //req.user will be available because of the protectedRoute middleware and this function will be called only if the user is authenticated which will be checked by the protectedRoute middleware
+  try {
+    res.status(200).json({
+      success: true,
+      message: "User is authenticated",
+      user: req.user, //sending the logged in user's data to the frontend
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: "false",
+      message: "Error checking authentication",
+      error: err.message,
+    });
+  }
+};

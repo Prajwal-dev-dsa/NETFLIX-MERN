@@ -4,7 +4,7 @@ export const getTrendingTV = async (req, res) => {
   try {
     //fetching the trending tv shows from the TMDB API
     const data = await fetchFromTMDB(
-      "https://api.themoviedb.org/3/trending/tv/day" //this is the url of the trending tv shows
+      "https://api.themoviedb.org/3/trending/tv/day?language=en-US" //this is the url of the trending tv shows
     );
     //selecting a random tv from the multiple trending tv shows which we got in the data variable
     const randomTV =
@@ -19,7 +19,7 @@ export const getTVTrailers = async (req, res) => {
   try {
     const { id } = req.params; //getting the id of the tv show from the request params
     const data = await fetchFromTMDB(
-      `https://api.themoviedb.org/3/tv/${id}/videos` //this is the url of the trailer of the tv show
+      `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US` //this is the url of the trailer of the tv show
     );
     res.json({ success: true, trailers: data.results }); //sending the trailers to the client
   } catch (error) {
@@ -34,7 +34,7 @@ export const getTVDetails = async (req, res) => {
   try {
     const { id } = req.params; //getting the id of the tv show from the request params
     const data = await fetchFromTMDB(
-      `https://api.themoviedb.org/3/tv/${id}` //this is the url of the details of the tv show
+      `https://api.themoviedb.org/3/tv/${id}?language=en-US` //this is the url of the details of the tv show
     );
     res.json({ success: true, details: data }); //sending the details to the client
   } catch (error) {
@@ -46,7 +46,7 @@ export const getSimilarTV = async (req, res) => {
   try {
     const { id } = req.params; //getting the id of the tv show from the request params
     const data = await fetchFromTMDB(
-      `https://api.themoviedb.org/3/tv/${id}/similar` //this is the url of the similar tv shows
+      `https://api.themoviedb.org/3/tv/${id}/similar?language=en-US&page=1` //this is the url of the similar tv shows
     );
     res.json({ success: true, similar: data }); //sending the similar tv shows to the client
   } catch (error) {
@@ -58,7 +58,7 @@ export const getTVByCategory = async (req, res) => {
   try {
     const { category } = req.params; //getting the category from the request params
     const data = await fetchFromTMDB(
-      `https://api.themoviedb.org/3/tv/${category}` //this is the url of the tv shows by category
+      `https://api.themoviedb.org/3/tv/${category}?language=en-US&page=1` //this is the url of the tv shows by category
     );
     res.json({ success: true, content: data }); //sending the content to the client
   } catch (error) {

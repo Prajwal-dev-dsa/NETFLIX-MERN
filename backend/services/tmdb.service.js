@@ -9,11 +9,15 @@ export const fetchFromTMDB = async (url) => {
       Authorization: "Bearer " + ENV_VARS.TMDB_API_KEY, //this is the authorization header
     },
   };
-
-  const response = await axios.get(url, options); //this is the axios request to the TMDB API
-
-  if (response.status !== 200) {
-    throw new Error("Failed to fetch from TMDB");
+  try {
+    const response = await axios.get(url, options); //this is the axios request to the TMDB API
+    if (response.status !== 200) {
+      throw new Error("Failed to fetch from TMDB");
+    }
+    console.log("TMDB API response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("TMDB API error:", error.message);
+    throw new Error("TMDB API request failed");
   }
-  return response.data;
 };

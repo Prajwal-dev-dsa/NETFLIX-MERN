@@ -4,7 +4,7 @@ export const getTrendingMovies = async (req, res) => {
   try {
     //fetching the trending movies from the TMDB API
     const data = await fetchFromTMDB(
-      "https://api.themoviedb.org/3/trending/movie/day" //this is the url of the trending movies
+      "https://api.themoviedb.org/3/trending/movie/day?language=en-US" //this is the url of the trending movies
     );
     //selecting a random movie from the multiple trending movies which we got in the data variable
     const randomMovie =
@@ -19,7 +19,7 @@ export const getMovieTrailers = async (req, res) => {
   try {
     const { id } = req.params; //getting the id of the movie from the request params
     const data = await fetchFromTMDB(
-      `https://api.themoviedb.org/3/movie/${id}/videos` //this is the url of the trailer of the movie
+      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US` //this is the url of the trailer of the movie
     );
     res.json({ success: true, trailers: data.results }); //sending the trailers to the client
   } catch (error) {
@@ -34,7 +34,7 @@ export const getMovieDetails = async (req, res) => {
   try {
     const { id } = req.params; //getting the id of the movie from the request params
     const data = await fetchFromTMDB(
-      `https://api.themoviedb.org/3/movie/${id}` //this is the url of the details of the movie
+      `https://api.themoviedb.org/3/movie/${id}?language=en-US` //this is the url of the details of the movie
     );
     res.json({ success: true, details: data }); //sending the details to the client
   } catch (error) {
@@ -46,7 +46,7 @@ export const getSimilarMovies = async (req, res) => {
   try {
     const { id } = req.params; //getting the id of the movie from the request params
     const data = await fetchFromTMDB(
-      `https://api.themoviedb.org/3/movie/${id}/similar` //this is the url of the similar movies
+      `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1` //this is the url of the similar movies
     );
     res.json({ success: true, similar: data }); //sending the similar movies to the client
   } catch (error) {
@@ -58,7 +58,7 @@ export const getMoviesByCategory = async (req, res) => {
   try {
     const { category } = req.params; //getting the category from the request params
     const data = await fetchFromTMDB(
-      `https://api.themoviedb.org/3/movie/${category}` //this is the url of the movies by category
+      `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1` //this is the url of the movies by category
     );
     res.json({ success: true, content: data }); //sending the content to the client
   } catch (error) {

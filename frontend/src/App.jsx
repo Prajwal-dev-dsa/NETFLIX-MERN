@@ -1,11 +1,50 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import HomePage from "./pages/home/HomePage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignUpPage";
+import Footer from "./components/Footer";
+import { Toaster } from "react-hot-toast";
+import { useAuthStore } from "./store/authUser";
 
 function App() {
+  //this is the authStore hook that will be used to check if the user is authenticated or not
+  //if user is authenticated then its data will be available in the user variable
+  //isCheckingAuth is just for good UI.
+  //authCheck will do the job of checking if the user is authenticated or not and will set the user data in the authStore
+  const { user, isCheckingAuth, authCheck } = useAuthStore();
+
+  useEffect(() => {
+    //whenever the app is loaded, the authCheck will be called to check if the user is authenticated or not
+    authCheck();
+  }, [authCheck]); //this will run only once when the authCheck is called
+
+  if (isCheckingAuth) {
+    //this will show the loading state for fraction of seconds when the useAuthStore is checking by authCheck if user is authenticated or not. Its basicially just for good UI
+    return (
+      <div className="flex items-center justify-center bg-black h-screen">
+        <div className="animate-spin rounded-full text-red-600 h-32 w-32 border-t-2 border-b-2 border-white-900"></div>
+      </div>
+    );
+  }
   return (
-    <div>
-      <h1 className='text-3xl font-bold underline'>hello</h1>
-    </div>
-  )
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} /> {/* HomePage */}
+        {/* if user is verified and available at authStore with the help of authCheck in useEffect then it will navigate straightaway based on the below logics */}
+        <Route
+          path="/login"
+          element={!user ? <LoginPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signup"
+          element={!user ? <SignupPage /> : <Navigate to="/" />}
+        />
+      </Routes>
+      <Footer />
+      <Toaster />
+    </>
+  );
 }
 
-export default App
+export default App;
