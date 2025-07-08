@@ -19,3 +19,13 @@
     background-position: 1000px 0;
   }
 }
+
+/* this is used to hide the scrollbar in the content slider */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
+}
