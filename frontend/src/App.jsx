@@ -6,6 +6,7 @@ import SignupPage from "./pages/SignUpPage";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authUser";
+import WatchPage from "./pages/WatchPage";
 
 function App() {
   //this is the authStore hook that will be used to check if the user is authenticated or not
@@ -39,6 +40,10 @@ function App() {
         <Route
           path="/signup"
           element={!user ? <SignupPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/watch/:id"
+          element={user ? <WatchPage /> : <Navigate to="/login" />}
         />
       </Routes>
       <Footer />
