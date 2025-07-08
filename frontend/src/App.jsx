@@ -9,6 +9,7 @@ import { useAuthStore } from "./store/authUser";
 import WatchPage from "./pages/WatchPage";
 import SearchPage from "./pages/SearchPage";
 import HistoryPage from "./pages/SearchHistoryPage";
+import NotFoundPage from "./pages/404";
 
 function App() {
   //this is the authStore hook that will be used to check if the user is authenticated or not
@@ -55,6 +56,7 @@ function App() {
           path="/history"
           element={user ? <HistoryPage /> : <Navigate to="/login" />}
         />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
       <Toaster />
