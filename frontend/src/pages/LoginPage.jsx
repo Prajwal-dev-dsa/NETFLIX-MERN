@@ -4,8 +4,8 @@ import { useAuthStore } from "../store/authUser";
 
 function LoginPage() {
   //creating states for 2 way binding
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(""); //this is the email that we are using to store the email
+  const [password, setPassword] = useState(""); //this is the password that we are using to store the password
 
   const { login } = useAuthStore(); //this will give us the login function from the authUser store
 

@@ -3,12 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 
 const AuthScreen = () => {
-  const [email, setEmail] = useState("");
-  const navigate = useNavigate();
+  const [email, setEmail] = useState(""); //this is the email that we are using to store the email
+  const navigate = useNavigate(); //this is the navigate function that we are using to navigate to the login page
 
   const handleFormSubmit = (e) => {
+    //this is the function that we are using to handle the form submission
     e.preventDefault();
-    navigate("/signup?email=" + email);
+    navigate("/signup?email=" + email); //this is the function that we are using to navigate to the signup page
   };
 
   return (

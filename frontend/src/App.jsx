@@ -34,7 +34,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} /> {/* HomePage */}
+        <Route path="/" element={<HomePage />} />
         {/* if user is verified and available at authStore with the help of authCheck in useEffect then it will navigate straightaway based on the below logics */}
         <Route
           path="/login"

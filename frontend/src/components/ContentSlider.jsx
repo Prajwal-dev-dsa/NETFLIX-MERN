@@ -6,26 +6,27 @@ import { SMALL_IMG_BASE_URL } from "../utils/constants";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const ContentSlider = ({ category }) => {
-  const { contentType } = useContentStore();
-  const [content, setContent] = useState([]);
-  const [showArrows, setShowArrows] = useState(false);
+  const { contentType } = useContentStore(); //this is the contentType that we are using to get the content from the store
+  const [content, setContent] = useState([]); //this is the content that we are using to display the content
+  const [showArrows, setShowArrows] = useState(false); //this is the state that we are using to show the arrows
 
-  const sliderRef = useRef(null);
+  const sliderRef = useRef(null); //this is the ref that we are using to scroll the slider
 
   const formattedCategoryName =
     category.replaceAll("_", " ")[0].toUpperCase() +
-    category.replaceAll("_", " ").slice(1);
-  const formattedContentType = contentType === "movie" ? "Movies" : "TV Shows";
+    category.replaceAll("_", " ").slice(1); //this is the formatted category name that we are using to display the category name
+  const formattedContentType = contentType === "movie" ? "Movies" : "TV Shows"; //this is the formatted content type that we are using to display the content type
 
   useEffect(() => {
     const getContent = async () => {
-      const res = await axios.get(`/api/v1/${contentType}/${category}`);
+      const res = await axios.get(`/api/v1/${contentType}/${category}`); //this is the axios request that we are using to get the content
       setContent(res.data.content.results);
     };
 
     getContent();
-  }, [contentType, category]);
+  }, [contentType, category]); //Will run if contentType or category of the page chnages
 
+  //left an right scrollers
   const scrollLeft = () => {
     if (sliderRef.current) {
       sliderRef.current.scrollBy({

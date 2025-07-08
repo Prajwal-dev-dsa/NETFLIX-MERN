@@ -8,23 +8,23 @@ import { ORIGINAL_IMG_BASE_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 
 const SearchPage = () => {
-  const [activeTab, setActiveTab] = useState("movie");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState("movie"); //this is the active tab that we are using to display the active tab
+  const [searchTerm, setSearchTerm] = useState(""); //this is the search term that we are using to store the search term
 
-  const [results, setResults] = useState([]);
-  const { setContentType } = useContentStore();
+  const [results, setResults] = useState([]); //this is the results that we are using to display the results
+  const { setContentType } = useContentStore(); //this is the setContentType function that we are using to set the content type
 
   const handleTabClick = (tab) => {
-    setActiveTab(tab);
+    setActiveTab(tab); //this is the function that we are using to set the active tab
     tab === "movie" ? setContentType("movie") : setContentType("tv");
-    setResults([]);
-    setSearchTerm("");
+    setResults([]); //making the results empty
+    setSearchTerm(""); //making the search term empty
   };
 
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(`/api/v1/search/${activeTab}/${searchTerm}`);
+      const res = await axios.get(`/api/v1/search/${activeTab}/${searchTerm}`); //this is the axios request that we are using to get the results
       setResults(res.data.content);
     } catch (error) {
       if (error.response.status === 404) {

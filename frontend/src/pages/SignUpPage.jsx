@@ -9,9 +9,9 @@ function SignUpPage() {
   const emailValue = searchParams.get("email"); //getting the email from the url
 
   //creating states for 2 way binding
-  const [email, setEmail] = useState(emailValue || "");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(emailValue || ""); //this is the email that we are using to store the email
+  const [username, setUsername] = useState(""); //this is the username that we are using to store the username
+  const [password, setPassword] = useState(""); //this is the password that we are using to store the password
 
   const { signup } = useAuthStore(); //this will give us the signup function from the authUser store
 

@@ -34,30 +34,30 @@ function formatDate(dateString) {
 }
 
 const SearchHistoryPage = () => {
-  const [searchHistory, setSearchHistory] = useState([]);
+  const [searchHistory, setSearchHistory] = useState([]); //this is the search history that we are using to display the search history
 
   useEffect(() => {
     const getSearchHistory = async () => {
       try {
-        const res = await axios.get(`/api/v1/search/history`);
+        const res = await axios.get(`/api/v1/search/history`); //this is the axios request that we are using to get the search history
         setSearchHistory(res.data.content);
       } catch (error) {
-        setSearchHistory([]);
+        setSearchHistory([]); 
       }
     };
     getSearchHistory();
-  }, []);
+  }, []); //Will run only once when the page is loaded
 
   const handleDelete = async (entry) => {
     try {
-      await axios.delete(`/api/v1/search/history/${entry.id}`);
-      setSearchHistory(searchHistory.filter((item) => item.id !== entry.id));
+      await axios.delete(`/api/v1/search/history/${entry.id}`); //this is the axios request that we are using to delete the search history
+      setSearchHistory(searchHistory.filter((item) => item.id !== entry.id)); //this is the search history that we are using to display the search history
     } catch (error) {
-      toast.error("Failed to delete search item");
+      toast.error("Failed to delete search item"); //this is the toast that we are using to display the error message
     }
   };
 
-  if (searchHistory?.length === 0) {
+  if (searchHistory?.length === 0) { //if the search history is empty, we will display a message
     return (
       <div className="bg-black min-h-screen text-white">
         <Navbar />
